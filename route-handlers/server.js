@@ -46,11 +46,16 @@ const server = http.createServer((req, res) => {
       res.write('Dogs index');
       return res.end();
     }
-    if (req.method === "GET" && req.url === "/dogs/:dogID") {
-      res.statusCode = 200;
-      res.setHeader('Content-Type', 'text/plain');
-      res.write(`Dog details for dogID: {:dogID}`);
-      return res.end();
+    // GET /dogs/:dogID // ex: /dogs/3
+    if (req.method === "GET" && req.url.startsWith('/dogs/')) {
+      const urlParts = req.url.split('/'); // ['', 'dogs', '3']
+      if (urlParts.length === 3) {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'text/plain');
+        res.write(`Dog details for dogID: `);
+        res.write(dogID);
+        return res.end();
+      }
     }
     if (req.method === "GET" && req.url === "/dogs/new") {
       res.statusCode = 200;
