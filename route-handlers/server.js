@@ -50,6 +50,7 @@ const server = http.createServer((req, res) => {
     if (req.method === "GET" && req.url.startsWith('/dogs/')) {
       const urlParts = req.url.split('/'); // ['', 'dogs', '3']
       if (urlParts.length === 3) {
+        const dogID = urlParts[2]
         res.statusCode = 200;
         res.setHeader('Content-Type', 'text/plain');
         res.write(`Dog details for dogID: `);
