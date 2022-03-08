@@ -43,20 +43,32 @@
 // server.listen(port, () => console.log('Server is listening on port',port));
 
 //setting route handlers:
-const server = http.createServer((req,res) =>{
-    console.log(`${req.method} ${req.url}`);
+// const server = http.createServer((req,res) =>{
+//     console.log(`${req.method} ${req.url}`);
 
+//     if(req.method === 'GET' && req.url === '/'){
+//         res.statusCode = 200;
+//         res.setHeader('Content-Type', 'text/html');
+//         res.write('<h1>This is the homepage</h1>');
+//         return res.end();
+//     }
+
+//     res.statusCode = 404;
+//     res.setHeader('Content-Type', 'text/html');
+//     res.end('<h1>Invalid URL</h1>');
+// });
+
+// const port = 5002;
+// server.listen(port, ()=> console.log('Server is listening on port',port));
+
+//Reading the html file:
+
+const http = require('http');
+const fs = require('fs');
+
+let dailyMessage = 'hello';
+const server = http.createServer((req,res) => {
     if(req.method === 'GET' && req.url === '/'){
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'text/html');
-        res.write('<h1>This is the homepage</h1>');
-        return res.end();
+        const htmlPage = fs.readFileSync('index.html', 'utf-8');
     }
-
-    res.statusCode = 404;
-    res.setHeader('Content-Type', 'text/html');
-    res.end('<h1>Invalid URL</h1>');
-});
-
-const port = 5002;
-server.listen(port, ()=> console.log('Server is listening on port',port));
+})

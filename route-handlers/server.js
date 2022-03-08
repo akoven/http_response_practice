@@ -46,12 +46,25 @@ const server = http.createServer((req, res) => {
       res.write('Dogs index');
       return res.end();
     }
-    if (req.method === "GET" && req.url === "/dogs/:dogID") {
-      res.statusCode = 200;
-      res.setHeader('Content-Type', 'text/plain');
-      res.write(`Dog details for dogID: {:dogID}`);
-      return res.end();
+    // if (req.method === "GET" && req.url === "/dogs/:dogID") {
+    //   res.statusCode = 200;
+    //   res.setHeader('Content-Type', 'text/plain');
+    //   res.write(`Dog details for dogID: {:dogID}`);
+    //   return res.end();
+    // }
+
+    if(req.method = 'GET' && req.url.startsWith('/dogs/')){
+      const urlParts = req.url.split('/');
+      if(urlParts.length === 3){
+        const dogId = urlParts[2];
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'text/plain');
+        res.write('Dog details for dogID: ');
+        res.write(dogId);
+        return res.end();
+      }
     }
+
     if (req.method === "GET" && req.url === "/dogs/new") {
       res.statusCode = 200;
       res.setHeader('Content-Type', 'text/plain');
