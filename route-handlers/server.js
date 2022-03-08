@@ -46,6 +46,7 @@ const server = http.createServer((req, res) => {
       res.write('Dogs index');
       return res.end();
     }
+<<<<<<< HEAD
     // if (req.method === "GET" && req.url === "/dogs/:dogID") {
     //   res.statusCode = 200;
     //   res.setHeader('Content-Type', 'text/plain');
@@ -61,6 +62,17 @@ const server = http.createServer((req, res) => {
         res.setHeader('Content-Type', 'text/plain');
         res.write('Dog details for dogID: ');
         res.write(dogId);
+=======
+    // GET /dogs/:dogID // ex: /dogs/3
+    if (req.method === "GET" && req.url.startsWith('/dogs/')) {
+      const urlParts = req.url.split('/'); // ['', 'dogs', '3']
+      if (urlParts.length === 3) {
+        const dogID = urlParts[2]
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'text/plain');
+        res.write(`Dog details for dogID: `);
+        res.write(dogID);
+>>>>>>> 7c3362f261b5139c859c7bd3fbd3f43889ce4889
         return res.end();
       }
     }
